@@ -12,13 +12,11 @@ import pandas as pd
 from tqdm import tqdm
 import pickle
 
-from deepface.basemodels import VGGFace, OpenFace, Facenet, Facenet512, FbDeepFace, DeepID, DlibWrapper, ArcFace, Boosting
-from deepface.extendedmodels import Age, Gender, Race, Emotion
-from deepface.commons import functions, realtime, distance as dst
-import represent
+from deepface.commons import functions, distance as dst
+from deepface.DeepFace import represent, build_model
 
 
-def find(img_path, db_path, model_name ='VGG-Face', distance_metric = 'cosine', model = None, enforce_detection = True, detector_backend = 'opencv', align = True, prog_bar = True):
+def find(img_path,  db_path = "dataset", model_name ='VGG-Face', distance_metric = 'cosine', model = None, enforce_detection = False, detector_backend = 'opencv', align = True, prog_bar = True):
 
 	"""
 	This function applies verification several times and find an identity in a database
@@ -82,7 +80,7 @@ def find(img_path, db_path, model_name ='VGG-Face', distance_metric = 'cosine', 
 
 		if path.exists(db_path+"/"+file_name):
 
-			print("WARNING: Representations for images in ",db_path," folder were previously stored in ", file_name, ". If you added new instances after this file creation, then please delete this file and call find function again. It will create it again.")
+			#print("WARNING: Representations for images in ",db_path," folder were previously stored in ", file_name, ". If you added new instances after this file creation, then please delete this file and call find function again. It will create it again.")
 
 			f = open(db_path+'/'+file_name, 'rb')
 			representations = pickle.load(f)

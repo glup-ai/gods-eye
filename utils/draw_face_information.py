@@ -1,13 +1,30 @@
 
 import numpy as np
 import cv2
+import pandas as pd
 
+male = pd.read_csv("data/names/herrenavn.csv")
+female = pd.read_csv("data/names/kvinnenavn.csv")
+maleLength = len(male['Navn'])
+feMaleLength = len(female['Navn'])
 
-def draw_information(image_total, loc, faces_df, analyzis_object):
+def draw_information(image_total, loc, faces_df, analyzis_object, useRandomNames=True):
+    currentDf = male if analyzis_object['gender'] == "Man"  else female
+    currentLength = maleLength if analyzis_object['gender'] == "Man"  else feMaleLength
+    randomInt = np.random.randint(1, currentLength)
+    
+    if (useRandomNames): 
+        score = 0
+        identity =  currentDf.iloc[randomInt]['Navn']
+    else: 
+        if(len(faces_df['identity']) > 0):
+            identity = faces_df.iloc[0]['identity'].split("/")[2]
+            score = faces_df.iloc[0]['VGG-Face_cosine']
+        else:
+            #choose random name if none identities was found
+            identity =  currentDf.iloc[randomInt]['Navn']
 
-    identity = faces_df.iloc[0]['identity'].split("/")[2]
-    score = faces_df.iloc[0]['VGG-Face_cosine']
-    x, y, width, height = loc   # x, y is the coordinate of the top left corner.
+    x, y, width, _ = loc   # x, y is the coordinate of the top left corner.
 
     draw_rectangle_with_opacity(image_total, loc)
     

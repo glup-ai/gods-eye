@@ -1,0 +1,4 @@
+cv2
+opencv-python
+tensorflow==2.6.0
+mtcnn

@@ -1,8 +1,11 @@
 import numpy as np
 import cv2
 import time
+from mtcnn import MTCNN
 
-def process_image(image, detector, ratio=0.752, min_confidence=0.9, debug=False):
+detector = MTCNN()
+
+def process_image(image, ratio=0.752, min_confidence=0.9, debug=False):
     """
     Process a single image.
     Parameters

@@ -16,7 +16,7 @@ from deepface.commons import functions, distance as dst
 from deepface.DeepFace import represent, build_model
 
 
-def find(img_path,  db_path = "dataset", model_name ='VGG-Face', distance_metric = 'cosine', model = None, enforce_detection = False, detector_backend = 'opencv', align = True, prog_bar = True):
+def find(img_path,  db_path = "data/__local_dataset__", model_name ='VGG-Face', distance_metric = 'cosine', model = None, enforce_detection = False, detector_backend = 'opencv', align = True, prog_bar = True):
 
 	"""
 	This function applies verification several times and find an identity in a database

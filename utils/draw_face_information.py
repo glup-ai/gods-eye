@@ -8,7 +8,7 @@ female = pd.read_csv("data/names/kvinnenavn.csv")
 maleLength = len(male['Navn'])
 feMaleLength = len(female['Navn'])
 
-def draw_information(image_total, loc, faces_df, analyzis_object, useRandomNames=True):
+def draw_information(image_total, loc, faces_df, analyzis_object, useRandomNames=False):
     currentDf = male if analyzis_object['gender'] == "Man"  else female
     currentLength = maleLength if analyzis_object['gender'] == "Man"  else feMaleLength
     randomInt = np.random.randint(1, currentLength)

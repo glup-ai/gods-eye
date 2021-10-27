@@ -51,8 +51,6 @@ def process_image(image, ratio=0.752, min_confidence=0.9, debug=False):
         if debug:
             print(f"{result['confidence']}")
         
-  
-        keypoints = result['keypoints']
         (x, y, width, height) = result['box']
         width_delta = int(((height * ratio) - width)/2)
 
@@ -61,26 +59,8 @@ def process_image(image, ratio=0.752, min_confidence=0.9, debug=False):
                         x-width_delta:x + width + width_delta, :
                     ]
 
-        faces.append([image_cropped,result['box']])            
+        faces.append([image_cropped,result['box'], result['keypoints']])            
     
-        cv2.rectangle(
-            img = image_total,
-            pt1 = (x, y),
-            pt2 = (x + width, y + height),
-            color = (0, 155, 255),
-            thickness = 2
-        )
-        cv2.circle(
-            img = image_total,
-            center = (keypoints['left_eye']),
-            radius = 2,
-            color = (0, 155, 255),
-            thickness = 2
-        )
-        cv2.circle(image_total, (keypoints['right_eye']), 2, (0, 155, 255), 2)
-        cv2.circle(image_total, (keypoints['nose']), 2, (0, 155, 255), 2)
-        cv2.circle(image_total, (keypoints['mouth_left']), 2, (0, 155, 255), 2)
-        cv2.circle(image_total, (keypoints['mouth_right']), 2, (0, 155, 255), 2)
 
     if debug:
         print("========================\n")

@@ -72,3 +72,27 @@ def draw_rectangle_with_opacity(image_total, loc):
     white_rect = np.ones(sub_img.shape, dtype=np.uint8) * 255
     res = cv2.addWeighted(sub_img, 0.5, white_rect, 0.5, 1.0)
     image_total[y:y+height, x+width:x+width+300] = res
+    
+    
+def draw_bounding_box(image_total, loc, keypoints):
+    (x, y, width, height) = loc
+
+    cv2.rectangle(
+        img = image_total,
+        pt1 = (x, y),
+        pt2 = (x + width, y + height),
+        color = (0, 155, 255),
+        thickness = 2
+    )
+        
+    cv2.circle(
+        img = image_total,
+        center = (keypoints['left_eye']),
+        radius = 2,
+        color = (0, 155, 255),
+        thickness = 2
+    )
+    cv2.circle(image_total, (keypoints['right_eye']), 2, (0, 155, 255), 2)
+    cv2.circle(image_total, (keypoints['nose']), 2, (0, 155, 255), 2)
+    cv2.circle(image_total, (keypoints['mouth_left']), 2, (0, 155, 255), 2)
+    cv2.circle(image_total, (keypoints['mouth_right']), 2, (0, 155, 255), 2)

@@ -205,4 +205,4 @@ cython_debug/
 # End of https://www.toptal.com/developers/gitignore/api/python,visualstudiocode,macos,linux
 
 __local_dataset__
-__local_test__.py
+__local_test_**
